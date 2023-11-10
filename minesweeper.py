@@ -214,12 +214,12 @@ class MinesweeperAI:
         # sentence
         for knowledge in self.knowledge:
             # modify the sentence to be added to the KB
-            if knowledge.cells.issubset(sentence):
-                sentence.cells.symmetric_difference_update(knowledge)
+            if knowledge.cells.issubset(sentence.cells):
+                sentence.cells.symmetric_difference_update(knowledge.cells)
                 sentence.count -= knowledge.count
             # modify the pre-existing knowledge
-            elif sentence.cells.issubset(knowledge):
-                knowledge.cells.symmetric_difference_update(sentence)
+            elif sentence.cells.issubset(knowledge.cells):
+                knowledge.cells.symmetric_difference_update(sentence.cells)
                 knowledge.count -= sentence.count
         self.knowledge.append(sentence)
 
