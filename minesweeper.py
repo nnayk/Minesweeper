@@ -1,6 +1,10 @@
 import itertools
 import random
 
+MINE = -1
+UNKNOWN = 0
+SAFE = 1
+
 
 class Minesweeper:
     """
@@ -186,8 +190,61 @@ class MinesweeperAI:
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
+        # mark the cell as a move that has been made
         self.moves_made.add(cell)
+        # mark the cell as safe
         self.safes.add(cell)
+        # add a new sentence to the AI's knowledge base based on the value of
+        # `cell` and `count`
+        sentence = Sentence(set(), 0)
+        sentence.count = count
+        self._addCellsToSentence(sentence, cell)
+
+        # mark any additional cells as safe or as mines
+        # if it can be concluded based on the AI's knowledge base
+        # mark any mine cells
+        if len(sentence.cells) == count:
+            for cell in sentence.cells:
+                self.mark_mine(cell)
+        # mark any safe cells
+        elif count == 0:
+            for cell in sentence.cells:
+                self.mark_safe(cell)
+
+    def _addCellsToSentence(self, sentence, cell):
+        directions = [
+            (-1, 0),
+            (1, 0),
+            (0, -1),
+            (0, 1),
+            (-1, -1),
+            (-1, 1),
+            (1, -1),
+            (1, 1),
+        ]
+        for dx, dy in directions:
+            currRow, currCol = cell[0] + dy, cell[1] + dx
+            currCell = (currRow, currCol)
+            if (self._validBounds(currCell)) and (
+                self.getStatus(cell) == UNKNOWN
+            ):
+                sentence.cells.add(currCell)
+
+    def _validBounds(self, cell):
+        row, col = cell
+        return (0 <= row < self.height) and (0 <= col < self.width)
+
+    def getStatus(self, cell):
+        """
+        Return -1 if cell is a known mine, 0 if unknown status, or 1 if cell
+        is known to be safe.
+        """
+        if cell in self.mines:
+            return -1
+        elif cell in self.safes:
+            return 1
+        else:
+            return 0
 
     def make_safe_move(self):
         """
