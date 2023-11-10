@@ -123,7 +123,6 @@ class Sentence:
         if cell in self.cells:
             self.cells.remove(cell)
             self.count -= 1
-        raise ValueError(f"mark_mine: cell {cell} not in{self.cells}")
 
     def mark_safe(self, cell):
         """
@@ -132,7 +131,6 @@ class Sentence:
         """
         if cell in self.cells:
             self.cells.remove(cell)
-        raise ValueError(f"mark_safe: cell {cell} not in {self.cells}")
 
 
 class MinesweeperAI:
