@@ -103,6 +103,9 @@ class Sentence:
     def __str__(self):
         return f"{self.cells} = {self.count}"
 
+    def __repr__(self):
+        return f"{self.cells} = {self.count}"
+
     def known_mines(self):
         """
         Returns the set of all cells in self.cells known to be mines.
@@ -238,7 +241,7 @@ class MinesweeperAI:
             currRow, currCol = cell[0] + dy, cell[1] + dx
             currCell = (currRow, currCol)
             if (self._validBounds(currCell)) and (
-                self.getStatus(cell) == UNKNOWN
+                self.getStatus(currCell) == UNKNOWN
             ):
                 sentence.cells.add(currCell)
 
