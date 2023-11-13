@@ -6,8 +6,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-This is an implementation of an AI knowledge-based agent that can succesfully
-win the popular classic game "Minesweeper".
+This is an implementation of an AI knowledge-based agent that can play the classic game "Minesweeper".
 
 ### Built With
 
@@ -15,12 +14,7 @@ win the popular classic game "Minesweeper".
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-
-User Experience Layout:
-<br>
-<img src="artifacts/ux1.png" alt="Logo" width="500" height="300">
-<img src="artifacts/ux2.png" alt="Logo" width="500" height="300">
-<img src="artifacts/ux3.png" alt="Logo" width="500" height="300">
+* `python3 runner.py`
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
